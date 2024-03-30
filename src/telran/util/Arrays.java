@@ -26,4 +26,19 @@ public class Arrays {
 		}
 		return res;
 	}
+	public static <T> void bubbleSort(T[] array, Comparator<T> comp) {
+		boolean isArraySorted = false;
+		int arrayLength = array.length;
+		while (!isArraySorted) {
+			isArraySorted = true;
+			for(int i=0; i<arrayLength-1;i++) {
+				if (comp.compare(array[i], array[i+1])>0) {
+					T tmp = array[i];
+					array[i]=array[i+1];
+					array[i+1]=tmp;
+					isArraySorted=false;
+				}
+			}
+		}
+	}
 }

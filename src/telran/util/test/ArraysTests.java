@@ -22,4 +22,12 @@ class ArraysTests {
 		assertEquals("y", Arrays.min(stringMin, new StringLengthComparator()));
 		assertEquals("123", Arrays.min(stringMin, new StringsComparator()));
 	}
+	@Test
+	void bubbleSortTest() {
+		Integer [] expected = {4, 8, 56, 100, 41, 23, -3, -7};
+		Integer [] numbersCopy = java.util.Arrays.copyOf(numbers, numbers.length);
+		Arrays.bubbleSort(numbersCopy, new EvenOddComparator());
+		assertArrayEquals(expected, numbersCopy);
+
+	}
 }
