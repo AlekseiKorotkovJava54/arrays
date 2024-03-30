@@ -71,12 +71,15 @@ String[] stringsMin = {"abc", "lmn", "123",  "y"};
 	@Test
 	void binarySearchTest() {
 		Integer [] numbersSorted = {-7,-3, 4, 8, 23, 41, 56, 100};
+		Integer [] numbersSorted1 = {-7,-3, 4, 8, 23, 41, 56, 100, 120};
 		Comparator<Integer> compNative = (s1, s2) -> s1.compareTo(s2);
 		assertEquals(2, Arrays.binarySearch(numbersSorted, 4, compNative));
 		assertEquals(0, Arrays.binarySearch(numbersSorted, -7, compNative));
 		assertEquals(7, Arrays.binarySearch(numbersSorted, 100, compNative));
 		assertEquals(-5, Arrays.binarySearch(numbersSorted, 9, compNative));
 		assertEquals(-4, Arrays.binarySearch(numbersSorted, 5, compNative));
+		assertEquals(-5, Arrays.binarySearch(numbersSorted1, 9, compNative));
+		assertEquals(-4, Arrays.binarySearch(numbersSorted1, 5, compNative));
 	}
 	 @Test
 	 void removeIfTest() {
