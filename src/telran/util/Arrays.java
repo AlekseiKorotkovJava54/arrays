@@ -62,6 +62,7 @@ public class Arrays {
 			else if(comp.compare(array[middle], key)>0) right = middle-1;	
 			}
 		if(left > right) middle = comp.compare(array[middle], key)>0 ? -(middle+1):-(middle+2);
+//		if(isKeyNotFind) middle = -(middle+1);
 		return middle;
 	}
 	public static <T> T[] search(T[] array, Predicate<T> predicate) {
@@ -77,13 +78,14 @@ public class Arrays {
 		return java.util.Arrays.copyOf(arResult,index);
 	}
 	public static <T> T[] removeIf(T[] array, Predicate<T> predicate) {
-		T[] arResult = java.util.Arrays.copyOf(array, array.length);
-		int index = 0;
-		for(int i = 0; i < array.length; i++) {
-			if(!predicate.test(array[i])) {
-				arResult[index++] = array[i];
-			}
-		}
-		return java.util.Arrays.copyOf(arResult,index);
+//		T[] arResult = java.util.Arrays.copyOf(array, array.length);
+//		int index = 0;
+//		for(int i = 0; i < array.length; i++) {
+//			if(!predicate.test(array[i])) {
+//				arResult[index++] = array[i];
+//			}
+//		}
+//		return java.util.Arrays.copyOf(arResult,index);
+		return Arrays.search(array, predicate);
 	}
 }

@@ -76,10 +76,11 @@ String[] stringsMin = {"abc", "lmn", "123",  "y"};
 		assertEquals(0, Arrays.binarySearch(numbersSorted, -7, compNative));
 		assertEquals(7, Arrays.binarySearch(numbersSorted, 100, compNative));
 		assertEquals(-5, Arrays.binarySearch(numbersSorted, 9, compNative));
+		assertEquals(-4, Arrays.binarySearch(numbersSorted, 5, compNative));
 	}
 	 @Test
 	 void removeIfTest() {
 		 Integer[] expectedAr = {100, -3, 4, 8, -7};
-		 assertArrayEquals(expectedAr, Arrays.removeIf(numbers,a -> Integer.toString(a).matches("\\d\\d")));
+		 assertArrayEquals(expectedAr, Arrays.removeIf(numbers,a -> !(Integer.toString(a).matches("\\d\\d"))));
 	 }
 }
