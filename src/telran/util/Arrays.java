@@ -61,8 +61,8 @@ public class Arrays {
 			else if(comp.compare(array[middle], key)<0) left = middle+1;
 			else if(comp.compare(array[middle], key)>0) right = middle-1;	
 			}
-		if(left > right) middle = comp.compare(array[middle], key)>0 ? -(middle+1):-(middle+2);
-//		if(isKeyNotFind) middle = -(middle+1);
+//		if(left > right) middle = comp.compare(array[middle], key)>0 ? -(middle+1):-(middle+2);
+		if(isKeyNotFind) middle = -(left+1);
 		return middle;
 	}
 	public static <T> T[] search(T[] array, Predicate<T> predicate) {
