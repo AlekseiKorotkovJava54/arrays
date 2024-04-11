@@ -1,7 +1,10 @@
 package telran.util;
 
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.function.Predicate;
+
+import javax.print.attribute.standard.MediaSize.Other;
 
 public class Arrays {
 	public static  <T> int indexOf(T[] array, T element) {
@@ -37,6 +40,21 @@ public class Arrays {
 			isUnsorted = false;
 			for(int i = 0; i < length; i++) {
 				if(comp.compare(array[i], array[i + 1]) > 0) {
+					swap(array, i, i + 1);
+					isUnsorted = true;
+				}
+			}
+		}
+	}
+	
+	public static <T extends Comparable<T>> void bubbleSort1(T[] array) {
+		boolean isUnsorted = true;
+		int length = array.length;
+		while(isUnsorted) {
+			length--;
+			isUnsorted = false;
+			for(int i = 0; i < length; i++) {
+				if(array[i].compareTo(array[i + 1]) > 0) {
 					swap(array, i, i + 1);
 					isUnsorted = true;
 				}
@@ -87,5 +105,13 @@ public class Arrays {
 //		}
 //		return java.util.Arrays.copyOf(arResult,index);
 		return Arrays.search(array, predicate);
+	}
+	public static <T> T[]  add (T[] array, T element) {
+		T[] result = java.util.Arrays.copyOf(array, array.length+1);
+		result[array.length] = element;
+		return result;
+	}
+	public static <T> T[] copy(T[] array) {
+		return java.util.Arrays.copyOf(array, array.length);
 	}
 }

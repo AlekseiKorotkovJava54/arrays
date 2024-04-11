@@ -4,10 +4,12 @@ package telran.util.test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
 
 import telran.util.Arrays;
+
 
 class ArraysTests {
 Integer[] numbers = {100, -3, 23, 4, 8, 41, 56, -7};
@@ -31,7 +33,7 @@ String[] stringsMin = {"abc", "lmn", "123",  "y"};
 	@Test
 	void bubbleSortTest() {
 		Integer [] expected = {4, 8, 56, 100, 41, 23, -3, -7};
-		Integer [] numbersCopy = java.util.Arrays.copyOf(numbers, numbers.length);
+		Integer [] numbersCopy = Arrays.copy(numbers);
          /* lambda expression example */
      	// Comparator<Integer> evenOddComp = (num1, num2) ->
         // evenOddComparator(num1, num2);
@@ -41,8 +43,23 @@ String[] stringsMin = {"abc", "lmn", "123",  "y"};
 		/*********************************************/
 		Arrays.bubbleSort(numbersCopy, evenOddComp);
 		assertArrayEquals(expected, numbersCopy);
-		
 	}
+	
+	@Test
+	void bubbleSort1Test() {
+		Integer [] expected1 = {4, 8, 56, 100, 41, 23, -3, -7};
+		MyNumber [] expected = new MyNumber[numbers.length];
+		for (int i = 0; i < expected1.length; i++) {
+			expected[i] = new MyNumber(expected1[i]); 
+		}
+		MyNumber [] numbersCopy = new MyNumber[numbers.length];
+		for (int i = 0; i < numbersCopy.length; i++) {
+			numbersCopy[i] = new MyNumber(numbers[i]); 
+		}
+		Arrays.bubbleSort1(numbersCopy);
+		assertArrayEquals(expected, numbersCopy);
+	}
+	
 	static int evenOddComparator(Integer num1, Integer num2) {
 		//first even numbers sorted in the ascending order
 		//last odd numbers sorted in the descending order
@@ -86,4 +103,90 @@ String[] stringsMin = {"abc", "lmn", "123",  "y"};
 		 Integer[] expectedAr = {100, -3, 4, 8, -7};
 		 assertArrayEquals(expectedAr, Arrays.removeIf(numbers,a -> !(Integer.toString(a).matches("\\d\\d"))));
 	 }
+	 @Test
+	 void addTest () {
+		 Integer[] expected = {100, -3, 23, 4, 8, 41, 56, -7,150};
+		 Integer[] actual = Arrays.add(numbers, 150);
+		 assertArrayEquals(expected, actual);
+	 }
+	 @Test
+	 void personsSortTest () {
+		 Person prs1 = new Person(123,1985);
+		 Person prs2 = new Person(120,2000);
+		 Person prs3 = new Person(128,1999);
+		 Person [] persons = {prs1,prs2,prs3};
+		 java.util.Arrays.sort(persons);
+		 Person [] expected = {new Person(120,2000),new Person(123,1985),new Person(128,1999)};
+		 assertArrayEquals(expected, persons);
+		 Person [] expectedAge = {new Person(120,2000),new Person(128,1999),new Person(123,1985)};
+		 java.util.Arrays.sort(persons, (p1,p2) -> Integer.compare(p2.birthYear, p1.birthYear));
+		 assertArrayEquals(expectedAge, persons);
+	 }
+}
+class Person implements Comparable<Person>{
+	long id;
+	int birthYear;
+	public Person(long id, int birthYear) {
+		super();
+		this.id = id;
+		this.birthYear = birthYear;
+	}
+	@Override
+	public int compareTo(Person o) {
+		return Long.compare(id, o.id);
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(birthYear, id);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Person other = (Person) obj;
+		return birthYear == other.birthYear && id == other.id;
+	}	
+}
+class MyNumber implements Comparable<MyNumber> {
+    Integer value;
+
+    public MyNumber(Integer value) {
+        this.value = value;
+    }
+
+    @Override
+    public int compareTo(MyNumber o) {
+    	boolean isNum1Even = value % 2 == 0;
+        boolean isNum2Even = o.value % 2 == 0;
+        int res = 1;
+        if (isNum1Even && isNum2Even) {
+            res = Integer.compare(value, o.value);
+        } else if (!isNum1Even && !isNum2Even) {
+            res = Integer.compare(o.value, value);
+        } else if (isNum1Even) {
+            res = -1;
+        }
+        return res;
+    }
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(value);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MyNumber other = (MyNumber) obj;
+		return value == other.value;
+	}
 }
