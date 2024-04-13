@@ -25,6 +25,9 @@ public class Employee implements Comparable<Employee>{
 	public String getDepartment() {
 		return department;
 	}
+	public int computeSalary() {
+		return basicSalary;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
