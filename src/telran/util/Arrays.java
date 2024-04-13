@@ -104,7 +104,7 @@ public class Arrays {
 //			}
 //		}
 //		return java.util.Arrays.copyOf(arResult,index);
-		return Arrays.search(array, predicate);
+		return Arrays.search(array, predicate.negate());
 	}
 	public static <T> T[]  add (T[] array, T element) {
 		T[] result = java.util.Arrays.copyOf(array, array.length+1);
@@ -113,5 +113,16 @@ public class Arrays {
 	}
 	public static <T> T[] copy(T[] array) {
 		return java.util.Arrays.copyOf(array, array.length);
+	}
+	public static <T> T[] insert(T[] array, int index, T element) {
+		T[] result = java.util.Arrays.copyOf(array, array.length+1);
+		result[index] = element;
+		System.arraycopy(array, index, result, index+1, array.length-index);
+		return result;
+	}
+	public static <T> T[] insertSorted(T[]array, T element, Comparator<T> comp) {
+		int index = binarySearch(array, element, comp);
+		if(index<0) index = -(index+1);
+		return insert(array, index, element);
 	}
 }

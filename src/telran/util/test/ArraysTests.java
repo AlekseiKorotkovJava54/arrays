@@ -101,13 +101,23 @@ String[] stringsMin = {"abc", "lmn", "123",  "y"};
 	 @Test
 	 void removeIfTest() {
 		 Integer[] expectedAr = {100, -3, 4, 8, -7};
-		 assertArrayEquals(expectedAr, Arrays.removeIf(numbers,a -> !(Integer.toString(a).matches("\\d\\d"))));
+		 assertArrayEquals(expectedAr, Arrays.removeIf(numbers,a -> (Integer.toString(a).matches("\\d\\d"))));
 	 }
 	 @Test
 	 void addTest () {
 		 Integer[] expected = {100, -3, 23, 4, 8, 41, 56, -7,150};
 		 Integer[] actual = Arrays.add(numbers, 150);
 		 assertArrayEquals(expected, actual);
+	 }
+	 @Test
+	 void insertSortedTest() {
+		 Integer [] numbersSorted = {-7,-3, 4, 8, 23, 41, 56, 100, 120};
+		 Integer[] expected1 = {-10,-7,-3, 4, 8, 23, 41, 56, 100, 120};
+		 Integer[] expected2 = {-7,-3, 4, 8, 23, 25, 41, 56, 100, 120};
+		 Integer[] expected3 = {-7,-3, 4, 8, 23, 41, 56, 100, 120,150};
+		 assertArrayEquals(expected1, Arrays.insertSorted(numbersSorted, -10, (a,b) -> a.compareTo(b)));
+		 assertArrayEquals(expected2, Arrays.insertSorted(numbersSorted, 25, (a,b) -> a.compareTo(b)));
+		 assertArrayEquals(expected3, Arrays.insertSorted(numbersSorted, 150, (a,b) -> a.compareTo(b)));
 	 }
 	 @Test
 	 void personsSortTest () {
