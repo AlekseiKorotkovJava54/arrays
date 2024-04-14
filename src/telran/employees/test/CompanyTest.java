@@ -22,6 +22,7 @@ private static final String DEPARTMENT2 = "QA";
 private static final long ID4 = 122;
 private static final int SALARY4 = 1500;
 private static final String DEPARTMENT4 = "Sales";
+//FIXME there should be at least one object for all classes (WageEmployee, Manager, SalesPerson)
 Employee empl1 = new Employee(ID1, SALARY1, DEPARTMENT1);
 Employee empl2 = new Employee(ID2, SALARY2, DEPARTMENT1);
 Employee empl3 = new Employee(ID3, SALARY3, DEPARTMENT2);
@@ -59,6 +60,7 @@ void setCompany() {
 
 	@Test
 	void testGetDepartmentBudget() {
+		//FIXME there should be another value for budget's of DEPARTMENT1
 		assertEquals(SALARY1+SALARY2, company.getDepartmentBudget(DEPARTMENT1));
 		assertEquals(0, company.getDepartmentBudget(DEPARTMENT4));
 	}
@@ -72,5 +74,8 @@ void setCompany() {
 		assertEquals(index, expected.length);
 		assertThrowsExactly(NoSuchElementException.class,() -> it.next());
 	}
-
+	@Test
+	void testGetDepartments() {
+		//TODO
+	}
 }

@@ -7,7 +7,7 @@ import telran.util.Arrays;
 
 public class Company implements Iterable{
 	private Employee[] employees;
-	
+
 	public void addEmployee(Employee empl) {
 		long index = empl.getId();
 		if(getEmployee(index) != null) throw new IllegalStateException();
@@ -29,12 +29,15 @@ public class Company implements Iterable{
 		return emplForRemove;
 	}
 	public int getDepartmentBudget(String department) {
-		
+		//FIXME 
+				//should be updated
+				//returns sum of basic salary values for all employees of a given department
+				//if employees of a given department don't exist, returns 0
 		int sum = 0;
 		Iterator<Employee> it = iterator() ;
 		while(it.hasNext()){
 			Employee emplFromDep = it.next();
-			if(emplFromDep.getDepartment().equals(department)) sum+=emplFromDep.getBasicSalary();
+			if(emplFromDep.getDepartment().equals(department)) sum+=emplFromDep.computeSalary();
 		}
 		return sum;
 	}
@@ -46,6 +49,15 @@ public class Company implements Iterable{
 	public Iterator<Employee> iterator() {
 		
 		return new CompanyIterator();
+	}
+	public String[] getDepartments() {
+		//TODO
+		//write method returning all departments
+//		String [] allDepartments = new String[0];
+		String [] allDepartments = {};
+		for(Employee employee: employees) {
+		}
+		return null;
 	}
 	private class CompanyIterator implements Iterator<Employee> {
         int currentIndex = 0;
